@@ -23,10 +23,14 @@ jobs:
           echo test, and deploy your project.
 
       - name: Merge branchA into main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git fetch origin
           git checkout main
           git merge --no-ff branchA -m "Auto-merged branchA into main"
+          git push origin main
+
           git push origin main
